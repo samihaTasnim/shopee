@@ -5,10 +5,10 @@ import Header from './Components/Header';
 import {
   BrowserRouter as Router,
   Switch,
-  Route,
-  Link
+  Route
 } from "react-router-dom";
 import HomeScreen from './Components/Screens/HomeScreen';
+import ProductScreen from './Components/Screens/ProductScreen';
 
 function App() {
   return (
@@ -16,8 +16,14 @@ function App() {
       <Header></Header>
       <Container>
         <main className="py-3">
-        <h2>Welcome</h2>
-        <HomeScreen></HomeScreen>
+          <Switch>
+            <Route path='/' exact>
+              <HomeScreen></HomeScreen>
+            </Route>
+            <Route path='/product/:id' >
+              <ProductScreen></ProductScreen>
+            </Route>
+          </Switch>
         </main>
       </Container>
       <Footer></Footer>
