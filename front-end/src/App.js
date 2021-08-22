@@ -20,7 +20,7 @@ function App() {
             <Route path='/' exact>
               <HomeScreen></HomeScreen>
             </Route>
-            <Route path='/product/:id' >
+            <Route path='/api/products/:id' >
               <ProductScreen></ProductScreen>
             </Route>
           </Switch>

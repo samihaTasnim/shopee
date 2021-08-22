@@ -2,29 +2,32 @@ import React, { useEffect } from 'react'
 import { Button, Card, Col, Image, ListGroup, Row } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams, Link } from 'react-router-dom';
-import products from '../../products';
+import SpinnerComponent from './../Spinner'
 import Rating from '../Rating';
-import Message from '../components/Message'
-import Loader from '../components/Loader'
-import { listProductDetails } from '../actions/productActions'
+import Message from '../../Components/Message';
+import { listProductDetails } from '../../actions/productActions'
 
 const ProductScreen = () => {
 
   const { id } = useParams()
   const dispatch = useDispatch()
 
-  const productDetails = useSelector((state) => state.productDetails)
-  const { loading, error, product } = productDetails
-
+  
   useEffect(() => {
     dispatch(listProductDetails(id))
+    console.log('dispatched');
   }, [dispatch, id])
+
+  const productDetails = useSelector((state) => state.productDetailList)
+  console.log(productDetails, 'productdetails');
+  const { loading, error, product } = productDetails
+
 
   return (
     <>
       <Link className="btn btn-light my-3" to="/"> Go back</Link>
       {loading ? (
-        <Loader />
+        <SpinnerComponent />
       ) : error ? (
         <Message variant='danger'>{error}</Message>
       ) : (

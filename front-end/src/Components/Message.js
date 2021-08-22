@@ -7,4 +7,4 @@ const Message = ({ variant = 'info', children }) => {
 }
 
 
-export default Message
+export default Message;

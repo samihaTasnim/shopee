@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Col, Row } from 'react-bootstrap';
-import Spinner from './../Spinner'
 import Message from './../Message'
 import SingleProduct from '../SingleProduct';
-import { listProducts } from '../actions/productActions'
+import SpinnerComponent from './../Spinner';
+import { listProducts } from '../../actions/productActions'
 
 const HomeScreen = () => {
 
@@ -12,14 +12,18 @@ const HomeScreen = () => {
   const productList = useSelector(state => state.productList)
   const { loading, error, products, page, pages } = productList
 
+  console.log(products, 'product')
+
   useEffect(() => {
     dispatch(listProducts())
   }, [dispatch])
+
+
   return (
     <>
       <h2>Latest Products</h2>
       {
-        loading ? <Spinner></Spinner> : error ? <Message variant="danger" ></Message> :
+        loading ? <SpinnerComponent></SpinnerComponent> : error ? <Message variant="danger" ></Message> :
           <Row>
             {
               products.map(product => (
