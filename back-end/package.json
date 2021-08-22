@@ -9,7 +9,5 @@
   },
   "author": "Samiha Tasnim",
   "license": "ISC",
-  "dependencies": {
-    "mongodb": "^4.0.1"
-  }
+  "dependencies": {}
 }
