@@ -9,6 +9,7 @@ import {
 } from "react-router-dom";
 import HomeScreen from './Components/Screens/HomeScreen';
 import ProductScreen from './Components/Screens/ProductScreen';
+import CartScreen from './Components/Screens/CartScreen';
 
 function App() {
   return (
@@ -20,8 +21,11 @@ function App() {
             <Route path='/' exact>
               <HomeScreen></HomeScreen>
             </Route>
-            <Route path='/api/products/:id' >
+            <Route path='/products/:id' >
               <ProductScreen></ProductScreen>
+            </Route>
+            <Route path='/cart/:id?' >
+              <CartScreen></CartScreen>
             </Route>
           </Switch>
         </main>

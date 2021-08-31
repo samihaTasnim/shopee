@@ -1,6 +1,7 @@
 import express, { response } from 'express';
 import dotenv from 'dotenv'
 import productRoutes from './routes/productRoutes.js'
+import userRoutes from './routes/userRoutes.js'
 import connectDB from './config/db.js';
 import cors from 'cors'
 
@@ -27,6 +28,7 @@ app.use((err, req, res, next) => {
 })
 
 app.use('/api/products', productRoutes)
+app.use('/api/users', userRoutes)
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${process.env.PORT}`)

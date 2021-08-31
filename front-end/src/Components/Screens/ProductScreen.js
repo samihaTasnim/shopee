@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react'
-import { Button, Card, Col, Image, ListGroup, Row } from 'react-bootstrap';
+import React, { useEffect, useState } from 'react'
+import { Button, Card, Col, FormControl, Image, ListGroup, Row } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams, Link } from 'react-router-dom';
 import SpinnerComponent from './../Spinner'
@@ -7,7 +7,9 @@ import Rating from '../Rating';
 import Message from '../../Components/Message';
 import { listProductDetails } from '../../actions/productActions'
 
-const ProductScreen = () => {
+const ProductScreen = ({ history }) => {
+
+  const [qty, setQty] = useState(1)
 
   const { id } = useParams()
   const dispatch = useDispatch()
@@ -17,6 +19,10 @@ const ProductScreen = () => {
     dispatch(listProductDetails(id))
     console.log('dispatched');
   }, [dispatch, id])
+
+  const addToCart = () => {
+    history.push(`/cart/${id}?qty=${qty}`)
+  }
 
   const productDetails = useSelector((state) => state.productDetailList)
   console.log(productDetails, 'productdetails');
@@ -73,9 +79,27 @@ const ProductScreen = () => {
                       {product.countInStock > 0 ? 'In stock' : 'Out of stock'}
                     </Col>
                   </Row>
+                  { product.countInStock > 0 && (
+                    <ListGroup.Item>
+                      <Row>
+                        <Col>
+                        Quantity
+                        </Col>
+                        <Col>
+                        <FormControl as="select" value={qty} onChange={e => setQty(e.target.value)}>
+                          {
+                            [...Array(product.countInStock).keys()].map(x => (
+                              <option value={x + 1} key={x + 1}> {x +1} </option>
+                            ))
+                          }
+                        </FormControl>
+                        </Col>
+                      </Row>
+                    </ListGroup.Item>
+                  )}
                 </ListGroup.Item>
                 <ListGroup.Item className="d-flex justify-content-center" disabled={product.countInStock === 0}>
-                  <Button className="btn my-2">
+                  <Button className="btn my-2" onClick={addToCart}>
                     Add to cart
                   </Button>
                 </ListGroup.Item>
